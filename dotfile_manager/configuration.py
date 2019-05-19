@@ -23,7 +23,7 @@ class Configuration(JsonSerializable):
         }
 
     @staticmethod
-    def from_dictionary(dictionary: dict) -> Configuration:
+    def from_dict(dictionary: dict) -> Configuration:
         keys = ("name", "dotfiles", "scripts")
 
         if not JsonSerializable.keys_are_valid(keys, dictionary):
@@ -33,13 +33,13 @@ class Configuration(JsonSerializable):
 
         return Configuration(
             name=dictionary["name"],
-            dotfiles=Dotfile.from_json_list(dictionary["dotfiles"]),
-            scripts=Script.from_json_list(dictionary["scripts"])
+            dotfiles=Dotfile.from_list(dictionary["dotfiles"]),
+            scripts=Script.from_list(dictionary["scripts"])
         )
 
     @staticmethod
     def from_list(json_list: List[dict]):
-        return [Configuration.from_dictionary(config) for config in json_list]
+        return [Configuration.from_dict(config) for config in json_list]
 
     def build(self, configuration_path: str, dry_run: bool = False):
         # todo: check if config directory exists
