@@ -6,6 +6,9 @@ from typing import List
 
 
 class JsonSerializable(ABC):
+    def __init__(self, verbose: bool = False):
+        self.verbose = verbose
+
     @abstractmethod
     def to_dict(self) -> dict:
         """Serializes this object to a json encodable python dictionary."""
@@ -32,5 +35,5 @@ class JsonSerializable(ABC):
         return all(key in json_dict for key in keys)
 
     @abstractmethod
-    def build(self, source_path: Path, dry_run: bool = False):
+    def build(self, source_path: Path):
         pass
