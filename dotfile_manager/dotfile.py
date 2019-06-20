@@ -71,7 +71,7 @@ class Dotfile(JsonSerializable):
             target_parent_directory.mkdir(parents=True, exist_ok=True)
 
         with open(target_path, "w", encoding="utf-8") as file:
-            parts_directory = configuration_path / "dotfiles" / Path(self.name) / "parts"
+            parts_directory = configuration_path / "dotfiles" / Path(self.name)
 
             if not parts_directory.is_dir():
                 error("`{}` is not a directory or does not exists.".format(parts_directory), True)

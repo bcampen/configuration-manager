@@ -48,12 +48,13 @@ class Configuration(JsonSerializable):
         return [Configuration.from_dict(config, verbose) for config in json_list]
 
     def build(self, configuration_path: Path):
-        # todo: check if config directory exists
+        # make sure the configuration path exists
+        configuration_path.mkdir(parents=True, exist_ok=True)
 
         # build dotfiles
         for dotfile in self.dotfiles:
             if dotfile.active:
-                dotfile.build(configuration_path)
+                dotfile.build(configuration_path / self.name)
             elif self.verbose:
                 info("Skipping dotfile `{}`.".format(dotfile.target))
 
