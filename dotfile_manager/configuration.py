@@ -60,7 +60,7 @@ class Configuration(JsonSerializable):
 
         # build scripts
         for script in self.scripts:
-            script.build(configuration_path)
+            script.build(configuration_path / self.name)
 
 
 class InvalidConfigurationJsonObject(Exception):
